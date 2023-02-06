@@ -1,0 +1,63 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, '/'%>
+<div class= "container" >
+
+<% if !@turnos%>
+      <h3> No hay turnos</h3>
+<% else %>
+    <h3> <%= t('.title')%> </h3>
+    <table class="table table-striped">
+      <thead class="table-success">
+        <tr>
+        <% if current_user.rol == 'Personal Bancario'%>
+          <th>Cliente</th>
+        <% end %>
+          <th>Sucursal</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Estado</th>
+          <% if current_user.rol == "Personal Bancario"%>
+            <th>Atender</th>
+          <% end %>
+          <th>Detalle</th>
+          <% if current_user.rol == "Cliente"%>
+            <th>Editar</th>
+            <th>Cancelar</th>
+          <% end%>
+          
+        </tr>
+      </thead>
+      <tbody>
+          <% @turnos.each do |turno| %>   
+            <tr>
+              <% if current_user.rol == 'Personal Bancario'%>
+                <td scope="row"><%=User.find(turno.cliente_id).email%></td>
+              <% end %>
+              <td scope="row"><%=Sucursal.find(turno.sucursal_id).nombre%></td>
+              <td scope="row"><%=turno.fecha%></td>
+              <td scope="row"><%=turno.hora.strftime("%H:%M")%></td>
+              <td scope="row"><%=turno.estado%></td>
+              <% if current_user.rol == "Personal Bancario"%>
+              <td scope="row">
+                  <%= link_to "<button class='btn btn-outline-success btn-sm'><img src='https://icongr.am/fontawesome/check-square-o.svg?size=26&color=currentColor'></button>".html_safe, new_comentario_path(turno.id)%> 
+                </td>
+              <% end %>
+                <td scope="row">
+                  <%= link_to "<button class='btn btn-outline-info btn-sm'><img src='https://icongr.am/clarity/details.svg?size=26&color=currentColor'></button>".html_safe, show_turno_path(turno.id)%>
+                </td>
+                <% if turno.estado != "Atendido" && current_user.rol == "Cliente"%> 
+                  <td scope="row">
+                    <%= link_to "<button class='btn btn-outline-warning btn-sm'><img src='https://icongr.am/material/account-edit.svg?size=26&color=currentColor'></button>".html_safe, edit_turno_path(turno.id)%> 
+                  </td> 
+                  <td scope="row">
+                    <%= button_to destroy_turno_path(turno.id), method: :delete, :class => "btn btn-outline-danger btn-sm"  do %>
+                        <span ><img src='https://icongr.am/material/account-remove.svg?size=26&color=currentColor'></span>
+                  </td>
+                <% end %>
+            </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+    </table>
+  <% end %>
+</div>
+  

@@ -1,0 +1,41 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, turnos_path%>
+
+<div class="container"> 
+ <h3> <%= t('.title') %> </h3>
+    <table class="table table-striped">
+      <thead class="table-success">
+        <tr>
+          <th>Sucursal</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Motivo</th>
+          <th>Estado</th>
+          <%if current_user.rol == "Cliente"%>
+            <th>Oficial</th>
+            <th>Comentario</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+            <tr>
+              <td scope="row"><%= Sucursal.find(@turno.sucursal_id).nombre %></td>
+              <td scope="row"><%=@turno.fecha%></td>
+              <td scope="row"><%=@turno.hora.strftime("%H:%M")%></td>
+              <td scope="row"><%=@turno.motivo%></td>
+              <td scope="row"><%=@turno.estado%></td>
+              <% if @turno.bancario_id %>
+                <td scope="row"><%=User.find(@turno.bancario_id).email%></td>
+              <%else%>
+                <td scope="row"></td>
+              <% end %>
+              <%if @turno.estado == "Atendido"%>
+              <td scope="row">
+                <%= link_to "<button type='button' class='btn btn-outline-info btn-sm' ><img src = 'https://icongr.am/fontawesome/eye.svg?size=26&color=currentColor'></button>".html_safe, comentario_path(@turno.id)%>
+            </td>
+              <% else %>
+                <td scope="row"></td>
+              <% end %>
+            </tr>
+        </tbody>
+    </table>
+<div>

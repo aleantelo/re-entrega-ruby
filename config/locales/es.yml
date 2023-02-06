@@ -1,0 +1,101 @@
+es:
+  not_destroyed: 'La sucursal no puede ser eliminada. Tiene turnos pendientes asignados'
+  home:
+    index:
+      title: 'Bienvenido'
+  devise:
+    sessions:
+      new:
+        title: 'Inicio de sesión'
+  usuarios:
+    index:
+      title: 'Usuarios'
+    show:
+      title: 'Usuario'
+    destroy:
+      destroyed: 'El usuario ha sido eliminado correctamente'
+    update:
+      updated: 'Perfil del usuario actualizado.'
+      updatedd: 'Contraseña modificada. Vuelva a ingresar'
+    edit:
+      title: 'Editar'
+    create: 'Se agrego usuario correctamente.'
+  sucursals:
+    index:
+      title: 'Sucursales'
+    show:
+      title: 'Sucursal'
+    destroy:
+      destroyed: 'Sucursal eliminada correctamente.'
+    create: 'Se creo una nueva sucursal.'
+    edit:
+      title: 'Editar'
+  turnos:
+    create: 'Turno solicitado'
+    update:
+      edited: 'Turno actualizado correctamente'
+    index:
+      title: 'Turnos'
+    show:
+      title: 'Turnos >> Detalle'
+  comentarios:
+    create:
+      commented: "Turno atendido"
+      not_commented: 'Debe ingresar un comentario'
+    show:
+      title: 'Turnos >> Detalle >> Comentario'
+  date:
+      abbr_day_names:
+      - dom
+      - lun
+      - mar
+      - mié
+      - jue
+      - vie
+      - sáb
+      abbr_month_names:
+      - 
+      - ene
+      - feb
+      - mar
+      - abr
+      - may
+      - jun
+      - jul
+      - ago
+      - sep
+      - oct
+      - nov
+      - dic
+      day_names:
+      - domingo
+      - Lunes
+      - Martes
+      - Miercoles
+      - Jueves
+      - Viernes
+      - sábado
+      formats:
+        default: "%-d/%-m/%Y"
+        long: "%-d de %B de %Y"
+        short: "%-d de %b"
+      month_names:
+      - 
+      - enero
+      - febrero
+      - marzo
+      - abril
+      - mayo
+      - junio
+      - julio
+      - agosto
+      - septiembre
+      - octubre
+      - noviembre
+      - diciembre
+      order:
+      - :day
+      - :month
+      - :year
+
+

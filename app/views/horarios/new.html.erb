@@ -1,0 +1,39 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, sucursal_path(@sucursal.id)%>
+<div class="container">
+
+    <h2>Nuevo horario >> Sucursal >> <%= @sucursal.nombre %></h2>
+    <%= form_with model: @horario do |form| %>
+        <div>
+                <% if @horario.errors.any? %>
+                    <div id="error_explanation">
+                        <ul>
+                            <% @horario.errors.full_messages.each do |message| %>
+                                <li style="color:#FF0000"><%= message %></li>
+                            <% end %>
+                        </ul>
+                    </div>
+                <% end %>
+            </div>
+        <div class="form-group">
+            <%= form.label :dia  %>
+            <%= form.select :dia, ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"],:class => "form-control", :style => 'width: 200px;' %>
+        </div>
+
+        <div class="form-group">
+            <%= form.label :hora_de_apertura %>
+            <%= form.time_field :hora_inicio, :class => "form-control", :style => 'width: 200px;' %>
+        </div>
+        
+        <div class="form-group">
+            <%= form.label :hora_de_cierre%>
+            <%= form.time_field :hora_fin, :class => "form-control", :style => 'width: 200px;' %>
+        </div>
+
+        <%= form.hidden_field :sucursal_id, value: @sucursal.id %>
+
+
+        <%= form.submit 'Aceptar', :class => "btn btn-outline-success btn-sm" %>
+
+
+    <%end%>
+</div>

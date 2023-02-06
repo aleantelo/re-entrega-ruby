@@ -1,0 +1,18 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, sucursals_path%>
+<div class = "container">
+    <h3>Agregar Comentario</h3>
+
+    <%= form_with model: @comentarios do |form| %>
+        
+        <div class="form-group">
+            <%= form.label :Comentario %>
+            <%= form.text_area :comentario,  :class => "form-control", :style => 'width: 200px;'%>
+        </div>
+
+        <%= form.hidden_field :personal_id, value: current_user.id %>
+
+        <%= form.submit "Atender",:class => "btn btn-outline-success btn-sm"  %>
+
+
+    <%end%>
+</div>

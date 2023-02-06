@@ -1,0 +1,55 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, '/'%>
+<div class="container"> 
+  <h3> <%= t('.title')%> </h3>
+  <% if current_user.rol == "Admin" %>
+    <%= link_to "<button class='btn btn-outline-success btn-sm'>Agregar sucursal</button>".html_safe, new_sucursal_path()%> 
+  <% end %>
+  <table class="table table-striped">
+    <thead class="table-success">
+      <tr>
+        <th scope="col">Nombre</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Dirección</th>
+        <% if current_user.rol != "Cliente" %>
+          <th scope="col">Detalle</th>
+          <% if current_user.rol == "Admin"%>
+            <th scope="col">Editar</th>
+            <th scope="col">Eliminar</th>
+          <% end%>
+        <% end %>
+        <% if current_user.rol == "Cliente" %>
+          <th scope="col">Turno</th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+        <% @sucursales.each do |sucursal| %>             
+          <tr>
+            <td scope="row"><%=sucursal.nombre%></td>
+            <td scope="row"><%=sucursal.telefono%></td>
+            <td scope="row"><%=sucursal.direccion%></td>
+            <% if current_user.rol == "Cliente" %>
+              <td scope="row">
+                <%= link_to "<button class='btn btn-outline-info btn-sm'><img src='https://icongr.am/clarity/calendar.svg?size=26&color=currentColor'></button>".html_safe, new_turno_path(sucursal.id)%>
+              </td>
+            <% end %>
+             <% if current_user.rol != "Cliente" %>
+              <td scope="row">
+                <%= link_to "<button class='btn btn-outline-info btn-sm'><img src='https://icongr.am/fontawesome/eye.svg?size=26&color=currentColor'></button>".html_safe, sucursal_path(sucursal.id)%>
+              </td>
+              <% end %>
+              <% if current_user.rol == "Admin"%>
+              <td scope="row">
+                <%= link_to "<button class='btn btn-outline-warning btn-sm'><img src='https://icongr.am/fontawesome/edit.svg?size=26&color=currentColor'></button>".html_safe, edit_sucursal_path(sucursal.id)%> 
+              </td> 
+              <td scope="row">
+                <%= button_to destroy_sucursal_path(sucursal.id), method: :delete, :class => "btn btn-outline-danger btn-sm"  do %>
+                    <span ><img src='https://icongr.am/fontawesome/trash-o.svg?size=26&color=currentColor'></span>
+                <% end %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+</div>

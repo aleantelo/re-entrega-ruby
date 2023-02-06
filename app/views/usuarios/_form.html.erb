@@ -1,0 +1,31 @@
+<%= form_with model: @user, url: user_path, method: :PATCH do |form| %>
+    <div>
+        <% if @usuario.errors.any? %>
+            <div id="error_explanation">
+                <ul>
+                    <% @usuario.errors.full_messages.each do |message| %>
+                        <li style="color:#FF0000"><%= message %></li>
+                    <% end %>
+                </ul>
+            </div>
+        <% end %>
+    </div>
+        <div class="form-group">
+            <%= form.label :email, style: "display: block"%>
+            <%= form.email_field :email, required: true, value:@usuario.email,  :class => "form-control",:style => 'width: 200px;'  %>
+        </div>
+        <div class="form-group">
+            <%= form.label :Ingrese_su_nueva_contraseña, style: "display: block" %>
+            <%= form.password_field :password, required: true, :class => "form-control",:style => 'width: 200px;'  %>
+        </div>
+        <% if @current_user.rol == "Admin"  && @usuario.rol == "Personal Bancario" %>
+            <div class="form-group">
+                <%= form.label :sucursal %>
+                <%= form.select "sucursal_id", options_for_select(Sucursal.all.collect { |sucursal| [sucursal.nombre, sucursal.id] }, @usuario.sucursal_id)%>
+            </div>
+        <%end%>
+    <div>
+        <%= form.submit value="Aceptar",:class => "btn btn-outline-success btn-sm"%>
+    </div>
+    
+<% end %>

@@ -1,0 +1,39 @@
+    <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, usuarios_path%>
+
+<div class="container">
+    <h3>Agregar: <%= @user.rol %></h3>
+    <%= form_with model: @usuario, url: create_personal_path, method: :post do |form| %>
+        <div>
+            <% if @user.errors.any? %>
+                <div id="error_explanation">
+                    <ul>
+                        <% @user.errors.full_messages.each do |message| %>
+                            <li style="color:#FF0000"><%= message %></li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %>
+        </div>
+            <div class="form-group">
+                <%= form.label :Email %>
+                <%= form.email_field :email, :class => "form-control", :placeholder => "Email", :style => 'width: 200px;'%>
+            </div>
+            <div class="form-group">
+                <%= form.label :Contraseña %>
+                <%= form.password_field :password, :class => "form-control", :placeholder => "Contraseña", :style => 'width: 200px;'%>
+            </div>
+            <div class="form-group">
+                <%= form.label :Confirmar_Contraseña %>
+                <%= form.password_field :password_confirmation, :class => "form-control", :placeholder => "Confirmar contraseña", :style => 'width: 200px;'%>
+            </div>
+            <% if @user.rol == "Personal Bancario"%>
+            <div class="form-group">
+                <%= form.label :sucursal %>
+                <%= form.select "sucursal_id", options_for_select(Sucursal.all.collect { |sucursal| [sucursal.nombre, sucursal.id] }, @user.sucursal_id)%>
+            </div>
+            <% end %>
+            <%= form.hidden_field :rol, value: @user.rol %>
+            <%= form.submit "Guardar", :class => "btn btn-outline-success btn-sm"%>
+        </div>
+    <%end%>
+</div>

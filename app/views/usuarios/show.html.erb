@@ -1,0 +1,28 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, '/usuarios'%>
+
+<div class="container"> 
+ <h3> <%= t('.title') + " >> " + @usuario.email%> </h3>
+    <table class="table table-striped">
+      <thead class="table-success">
+        <tr> 
+          <th>Email</th>
+          <th>Rol</th>
+          <% if current_user.rol == "Admin" && @usuario.sucursal_id%>
+            <th>Sucursal</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr>
+          <td><%= @usuario.email %></td>
+          <td><%= @usuario.rol %></td>
+          <% if current_user.rol == "Admin" && @usuario.sucursal_id%>
+            <td><%= Sucursal.find(@usuario.sucursal_id).nombre %></td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+    <% if not @admin  %>
+      <%= link_to "<button class='btn btn-outline-success btn-sm'>Modificar</button>".html_safe, edit_user_registration_path(@usuario.id) %>
+    <% end %>
+<div>

@@ -1,0 +1,64 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, sucursals_path%>
+
+<div class="container"> 
+  <h3> <%= t('.title') + " >> " + @sucursal.nombre%> </h3>
+  <% if current_user.rol == "Admin" %>
+    <%= link_to "<button class='btn btn-outline-success btn-sm'>Agregar horario</button>".html_safe, new_horario_path(@sucursal.id)%> 
+  <% end %>
+    <table class="table table-striped">
+      <thead class="table-success">
+        <tr> 
+          <th scope="col">Nombre</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Dirección</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr>
+          <td><%= @sucursal.nombre %></td>
+          <td><%= @sucursal.telefono %></td>
+          <td><%= @sucursal.direccion %></td>
+        </tr>
+      </tbody>
+    </table>
+
+<br/>
+<br/>
+  <h3> Horarios </h3>
+  <div>
+    <table class="table table-striped">
+          <thead class="table-success">
+            <tr> 
+              <th scope="col">Dia</th>
+              <th scope="col">Abre</th>
+              <th scope="col">Cierra</th>
+              <% if current_user.rol == "Admin"%>
+                <th>Editar</th>
+                <th>Eliminar</th>
+              <% end %>
+            </tr>
+          </thead>
+          <tbody>
+        <% @sucursal.horario.each do |horario| %>             
+          <tr>
+            <td scope="row"><%=horario.dia%></td>
+            <td scope="row"><%=horario.hora_inicio.strftime("%H:%M")%></td>
+            <td scope="row"><%=horario.hora_fin.strftime("%H:%M")%></td>
+
+            <% if current_user.rol == "Admin"%>
+              <td scope="row">
+                <%= link_to "<button class='btn btn-outline-warning btn-sm'><img src='https://icongr.am/fontawesome/edit.svg?size=26&color=currentColor'></button>".html_safe, edit_horario_path(@sucursal.id,horario.id)%>
+              </td>
+              <td scope="row">
+              <%= button_to destroy_horario_path(@sucursal.id,horario.id), method: :delete, :class => "btn btn-outline-danger btn-sm"  do %>
+                  <span ><img src='https://icongr.am/fontawesome/trash-o.svg?size=26&color=currentColor'></span>
+              <% end %>
+            </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+        </table>
+  </div>
+<div>
+

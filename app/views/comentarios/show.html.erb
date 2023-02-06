@@ -1,0 +1,17 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/mail-reply.svg?size=26&color=currentColor'></button>".html_safe, show_turno_path(@turno.id)%>
+
+<div class="container">
+ <h3> <%= t('.title') %> </h3>
+  <table class="table table-striped">
+  <thead class="table-success">
+      <tr>
+        <th>Comentario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= @comentario %> </td>
+      </tr>  
+    </tbody>
+  </table> 
+</div>

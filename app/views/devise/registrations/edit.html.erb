@@ -1,0 +1,38 @@
+ <%= link_to "<button type='button' class='btn btn-outline-secondary btn-sm' ><img src = 'https://icongr.am/fontawesome/arrow-left.svg?size=26&color=currentColor'></button>".html_safe, '/'%>
+<div class="container">
+  <h2>Editar</h2>
+
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", :class => "form-control", :style => 'width: 200px;' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password %> <br />
+      <%= f.password_field :password, autocomplete: "new-password", :class => "form-control", :style => 'width: 200px;'%>
+      <% if @minimum_password_length %>
+        <br />
+        <em><%= @minimum_password_length %> caracteres minimo</em>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => "form-control", :style => 'width: 200px;' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :current_password %> <br />
+      <%= f.password_field :current_password, autocomplete: "current-password", :class => "form-control", :style => 'width: 200px;' %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "Aceptar", :class => "btn btn-outline-success btn-sm"%>
+    </div>
+  <% end %>
+</div>
+
+
